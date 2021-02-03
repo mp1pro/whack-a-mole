@@ -4,7 +4,7 @@ import React from 'react';
 
 import { BrowserRouter as Router, Route, Link, Redirect, withRouter } from "react-router-dom";
 
-//import Routes from './routes/routes';
+import Routes from './routes/routes';
 
 class App extends React.Component {
     constructor(props) {
@@ -15,14 +15,15 @@ class App extends React.Component {
         }
     }
     
+    componentDidMount() {}
+    
     render() {
     
         //console.log('isUserLoggedIn',localStorage.getItem('loggedIn'));
+        console.log("Did I mount routes APPS");
         
         return (
-            <div className="App">
-                <h1> Hello, World! </h1>
-            </div>
+            <Routes auth={this.state.auth}  />
         )
     }
     
