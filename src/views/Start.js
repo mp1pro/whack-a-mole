@@ -1,11 +1,13 @@
- 
 import React from 'react';
+import { Link } from "react-router-dom";
 
 function Start() {
     console.log("Did I mount start");
   return (
     <div>
-      <button>Start Game</button>
+        <Link className="menu" to={{pathname: 'game'}}>
+            <button>Start Game</button>
+        </Link>
     </div>
   );
 }

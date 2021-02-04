@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/mp1pro/whack-a-mole#readme",
   "dependencies": {
+    "firebase": "^8.2.5",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0",

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {  Redirect } from "react-router-dom";
+import {  Redirect, withRouter, Link } from "react-router-dom";
 
 class Login extends React.Component {
   constructor(props) {
@@ -59,18 +59,9 @@ class Login extends React.Component {
     return (
       <div className="col-md-12">
         <div className="row section1">
-            <img className="parallax-image1" src="/assets/images/wandlogin.png" />
             <form id="signin-form" className="text-center col-xl-12">
             <div className="col-xl-5 col-lg-8 col-md-12 offset-lg-2 center sign-form">
                 <div className="col-xl-10 col-lg-11 col-md-12 center">
-                <h1 className="sign-title">Sign In With Wand</h1>
-                <div className="form-group">
-                    <button className="social-sign facebook-sign">
-                    <img src="https://wandusa.com/wand_app2/assets/images/facebook.svg" />
-                    Sign Up with Facebook
-                    </button>
-                </div>
-                <h3 style={{ color: "#3F3939", fontWeight: "bold" }}>OR</h3>
                 <div className="form-group">
                     <input
                     onChange={this.handleUserChange} 
@@ -94,17 +85,17 @@ class Login extends React.Component {
                 <div className="form-group mt-5">
                     <button className="sign-button" onClick={this.login}>Sign In</button>
                 </div>
-                <div className="form-group mt-4 mb-2">Forgot your Password?</div>
+                
                 <div className="col-md-12 mt-3">
                     <div className="form-group seperate-bar" />
                 </div>
                 <div className="form-group">
-                    <h4>Don't have a Wand account?</h4>
+                    <h4>Don't have a Game account?</h4>
                     <h4>
-                    <a href="/signup" className="underlined sign-link">
+                   <Link className="menu" to={{pathname: '/signup'}}>
                         Sign Up
-                    </a>
-                    ↗
+                    </Link>
+                    
                     </h4>
                 </div>
                 </div>
@@ -116,4 +107,4 @@ class Login extends React.Component {
   } 
 } 
 
-export default Login; 
+export default withRouter(Login);

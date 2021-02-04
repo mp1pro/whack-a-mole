@@ -24,12 +24,15 @@ const AuthMenu = withRouter(
         </div>
     ) : (
         <div className="sign_bar">
-            <a className="menu" id="signup" href="/signup">Sign Up</a>
-                <span className="split_bar"></span>
-            &nbsp;
+        
+            <Link className="menu" to={{pathname: '/signup'}}>
+                Sign Up
+            </Link>
+           
+            &nbsp;&nbsp;
           
-            <Link className="menu" to={{pathname: '/about', state: { from: location.pathname }}}>
-                signin
+            <Link className="menu" to={{pathname: '/login', state: { from: location.pathname }}}>
+                Sign In
             </Link>
         </div>
     )
