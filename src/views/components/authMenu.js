@@ -1,4 +1,4 @@
- import React from 'react';
+import React from 'react';
 import { withRouter, Link } from "react-router-dom";
  
 const AuthMenu = withRouter(
@@ -12,15 +12,7 @@ const AuthMenu = withRouter(
             >
                 Sign out
             </button>
-            <a className="menu">    
-            <img src="./assets/images/Profile Picture Denver2.png" height={50} />
-            &nbsp;&nbsp;Ben<img src="/assets/icons/menu.png" height={30} />
-            &nbsp;
-            </a>
-            <a>
-            <img src="/assets/icons/chat.png" />
-            <img src="/assets/icons/alarm.png" />
-            </a>
+           
         </div>
     ) : (
         <div className="sign_bar">
@@ -36,7 +28,6 @@ const AuthMenu = withRouter(
             </Link>
         </div>
     )
-                    
 );
 
 export default AuthMenu;

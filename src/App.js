@@ -18,52 +18,46 @@ class App extends React.Component {
         }
         this.handleSignUp = this.handleSignUp.bind(this);
         this.login = this.login.bind(this);
+        this.logout = this.logout.bind(this);
     }
     
 
-    login({email,password}){
-        firebase.auth().signInWithEmailAndPassword(email, password)
+    login(email,password){
+        let user = '';
+        fire.auth().signInWithEmailAndPassword(email, password)
         .then((userCredential) => {
             // Signed in
+            console.log('user=log: ', user);
             const user = userCredential.user;
+            if (user !== ''){
+                this.setState(
+                    {auth: true, user: user},
+                    () => {
+                        localStorage.setItem('loggedIn', 'true');
+                        localStorage.setItem('user', JSON.stringify(user));
+                    }
+                );
+            }
             // ...
         })
         .catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
         });
-    
-        /*Auth.auth({...rest}).then(searchResults => {
-            const userData = searchResults.data[0];
-            const success = JSON.parse(searchResults.success);
-
-            if (success){
-                console.log('AUTH: ',  typeof searchResults.success,' + ', success);
-                this.setState(
-                    {auth: success, user: userData},
-                    () => {
-                        localStorage.setItem('loggedIn', 'true');
-                        localStorage.setItem('user', JSON.stringify(userData));
-                    }
-                );
-            }
-            else
-            {
-                this.setState(
-                    {auth: success}
-                )
-            }
-        });*/
     }
     
     handleSignUp({...rest}){
+        let user = '';
         const {email,password} = {...rest};
         fire.auth().createUserWithEmailAndPassword(email,password)
         .then((userCredential) => {
             
             const user = userCredential.user;
             console.log('user : ', user);
-            this.setState({register: true});
+            
+            if(user !== ''){
+                this.setState({register: true});
+            }
 
             
         })
@@ -73,8 +67,35 @@ class App extends React.Component {
             console.log('error message: ', errorMessage + ' : ' +errorCode );
         });
     }
+    logout (){
+        /*let history = useHistory();
+        history.replace("/");*/
+
+        this.setState({ auth: false });
+        //console.log('logout: ',this.state.auth);
+        //reset localstaorage
+        localStorage.clear();
+        console.log("Bye",this.state.auth);
+
+    };
     
-    componentDidMount() {}
+    componentDidMount() {
+
+
+        if(localStorage.getItem('loggedIn') === 'true' ){
+            console.log('authmount: ', loggedIn);
+            const loggedIn = localStorage.getItem("loggedIn");
+            this.setState({ auth: JSON.parse(loggedIn) });
+
+        }
+        if (localStorage.getItem("user") != null) {
+            let userArray = localStorage.getItem("user");
+            if(userArray.length > 0){this.setState({ user: JSON.parse(userArray) })}
+             console.log('user local: ', JSON.parse(userArray));
+            console.log('user2 local: ', userArray);
+        }
+        //console.log("AuthbyLocal",this.state.auth);
+    }
     
     render() {
     
@@ -82,7 +103,13 @@ class App extends React.Component {
         console.log("Did I mount routes APPS");
         
         return (
-            <Routes auth={this.state.auth} register={this.state.register} login={this.login}  handleSignUp = {this.handleSignUp} />
+            <Routes 
+                auth={this.state.auth} 
+                register={this.state.register} 
+                login={this.login}  
+                logout={this.logout} 
+                handleSignUp = {this.handleSignUp} 
+            />
         )
     }
     

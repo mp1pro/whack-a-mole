@@ -43,7 +43,7 @@ class Routes extends React.Component {
         console.log('props_route ',this.props);
         console.log('this_route ',this);
         
-        const { auth, handleSignUp, login, register } = this.props;
+        const { auth, handleSignUp, login, register, logout } = this.props;
         
         return (
             <Router>
@@ -57,7 +57,7 @@ class Routes extends React.Component {
                                     <img src="./assets/images/wandlogo2.png" height="34"/>
                                 </Link>*/}
                             </div> 
-                            <AuthMenu auth={auth} logout={this.props.logout}/>
+                            <AuthMenu auth={auth} logout={logout}/>
                         </div>
                     </nav>
                     {/*CLOSE NAV*/}
