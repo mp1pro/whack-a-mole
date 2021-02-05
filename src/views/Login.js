@@ -40,7 +40,7 @@ class Login extends React.Component {
 
   render() {
       
-     let { from } = this.props.location.state || { from: { pathname: "/" } };
+     let  from  = this.props.location.state.from.pathname ||  "/"  ;
     
     
     console.log('from1', from );
@@ -52,10 +52,10 @@ class Login extends React.Component {
     
     
     console.log('from: ',from);
-    
+/*    
     console.log('this.state.username: ',this.state.username);
     console.log('this.state.password: ',this.state.password);
-      
+      */
     return (
       <div className="col-md-12">
         <div className="row section1">
