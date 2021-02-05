@@ -9,7 +9,7 @@ class Login extends React.Component {
     this.state = {
         username: '',
         password: '',
-        redirectToReferrer: false
+        redirectToReferrer: true
     };
     console.log('this.props',props);
     this.login = this.login.bind(this);
@@ -29,14 +29,20 @@ class Login extends React.Component {
     login (event) {
         console.log('this', this.props);
         //this.setState({ redirectToReferrer: true });
-        this.setState({ 'redirectToReferrer': true}, () => {
+        this.setState({ redirectToReferrer: true}, () => {
             console.log('redirectToReferrer :', this.state.redirectToReferrer);
             this.props.login(this.state.username,this.state.password);
         });
         
     };
   
-    
+    componentDidMount() {
+        console.log('true', localStorage);
+        if(localStorage.getItem('loggedIn') === 'true' ){
+            console.log('true', 'its true');
+            this.setState({ redirectToReferrer: true });
+        }
+    }
 
   render() {
       
@@ -47,8 +53,8 @@ class Login extends React.Component {
     let { redirectToReferrer } = this.state;
     console.log('rprops ', this.props);
     
-    console.log('redirectToReferrer', redirectToReferrer );
-    if (redirectToReferrer) return <Redirect to={from} />;  
+    console.log('redirectToReferrer1', redirectToReferrer );
+    if (this.props.auth === true) return <Redirect to={from} />;  
     
     
     console.log('from: ',from);

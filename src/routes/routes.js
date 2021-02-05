@@ -73,7 +73,7 @@ class Routes extends React.Component {
                             <Signup handleSignUp={handleSignUp} register={register}/>
                         </Route>
                         <Route exact path="/login">
-                            <Login login={login}/>
+                            <Login login={login} auth = {auth}/>
                         </Route>
                         <PrivateRoute auth = {auth} exact path="/game">
                             <Game />
