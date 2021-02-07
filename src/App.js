@@ -68,15 +68,14 @@ class App extends React.Component {
         });
     }
     logout (){
-        /*let history = useHistory();
-        history.replace("/");*/
-
-        this.setState({ auth: false });
-        //console.log('logout: ',this.state.auth);
-        //reset localstaorage
-        localStorage.clear();
-        console.log("Bye",this.state.auth);
-
+        fire.auth().signOut().then(() => {
+            // Sign-out successful.
+            this.setState({ auth: false });
+            localStorage.clear();
+            console.log("Bye",this.state.auth);
+        }).catch((error) => {
+            // An error happened.
+        });
     };
     
     componentDidMount() {

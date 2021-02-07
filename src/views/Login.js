@@ -47,6 +47,7 @@ class Login extends React.Component {
   render() {
       
      let  from  = this.props.location.state.from.pathname ||  "/"  ;
+     let {auth} = this.props;
     
     
     console.log('from1', from );
@@ -54,7 +55,10 @@ class Login extends React.Component {
     console.log('rprops ', this.props);
     
     console.log('redirectToReferrer1', redirectToReferrer );
-    if (this.props.auth === true) return <Redirect to={from} />;  
+
+          if (auth === true) return <Redirect to={from} />;
+
+
     
     
     console.log('from: ',from);
@@ -65,7 +69,7 @@ class Login extends React.Component {
     return (
       <div className="col-md-12">
         <div className="row section1">
-            <form id="signin-form" className="text-center col-xl-12">
+            <form id="signin-form" className="text-center col-xl-12" onSubmit={e => e.preventDefault()}>
             <div className="col-xl-5 col-lg-8 col-md-12 offset-lg-2 center sign-form">
                 <div className="col-xl-10 col-lg-11 col-md-12 center">
                 <div className="form-group">
