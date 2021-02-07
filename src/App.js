@@ -27,7 +27,6 @@ class App extends React.Component {
         fire.auth().signInWithEmailAndPassword(email, password)
         .then((userCredential) => {
             // Signed in
-            console.log('user=log: ', user);
             const user = userCredential.user;
             if (user !== ''){
                 this.setState(
@@ -35,6 +34,13 @@ class App extends React.Component {
                     () => {
                         localStorage.setItem('loggedIn', 'true');
                         localStorage.setItem('user', JSON.stringify(user));
+                        fire.auth().currentUser.getIdToken(true).then(function(idToken) {
+                            localStorage.setItem('token', JSON.stringify(idToken));
+                        }).catch(function(error) {
+                            // Handle error
+                            console.log('did not set currentuser ', error);
+                        });
+
                     }
                 );
             }
@@ -84,7 +90,7 @@ class App extends React.Component {
         if(localStorage.getItem('loggedIn') === 'true' ){
             console.log('authmount: ', loggedIn);
             const loggedIn = localStorage.getItem("loggedIn");
-            this.setState({ auth: JSON.parse(loggedIn) });
+            this.setState({ auth: JSON.parse(loggedIn) })
 
         }
         if (localStorage.getItem("user") != null) {
