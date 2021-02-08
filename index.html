@@ -5,19 +5,30 @@
         <title>Whack-a-mole</title>
     </head>
     <style>
+        .mole {
+            height: 100%;
+            width: 100%;
+            background-color: greenyellow;
+            border-radius: 50%;
+            position: absolute;
+            top:60px;
+
+        }
         .game-container {
             display: flex;
             flex-wrap: wrap;
             background-color: DodgerBlue;
+            overflow: hidden;
         }
 
         .game-container > div {
             background-color: #f1f1f1;
             width: 33%;
-            margin: 1px;
             text-align: center;
             height: 100px;
             font-size: 30px;
+            position: relative;
+            margin: .1%;
         }
     </style>
 <body>

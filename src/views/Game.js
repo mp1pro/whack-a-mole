@@ -19,9 +19,9 @@ class Game extends React.Component {
   render() {
         return (
             <div className="game-container ">
-                <Mole>
-                    <h1>GAME</h1>
-                </Mole>
+                <Hole>
+                    <Mole>GAME</Mole>
+                </Hole>
             </div>
         )
   }
