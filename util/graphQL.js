@@ -1,10 +1,26 @@
 import { ApolloClient, InMemoryCache, gql, createHttpLink, concat} from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
 
 const httpLink = createHttpLink({
-    uri: 'http://localhost:8001'
+    uri: 'http://localhost:3000/graphql'
 });
+
+const authLink = setContext((_, { headers }) => {
+    // get the authentication token from local storage if it exists
+    const token = localStorage.getItem('token');
+    console.log('tokenIssue', token);
+    // return the headers to the context so httpLink can read them
+    return {
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json',
+            authorization: token ? `Bearer ${token}` : "",
+        }
+    }
+});
+
 const client = new ApolloClient({
-    //authLink.concat(httpLink),
+    link: authLink.concat(httpLink),
     cache: new InMemoryCache()
 });
 
@@ -12,26 +28,20 @@ const GraphQL = {
 
         users: async () => {
             try {
-                fire.auth().currentUser.getIdToken(true)
-                .then(function(idToken) {
-                    const payloadHeader = {
-                        headers: {
-                            'Content-Type': 'application/json',
-                            Authorization: `Bearer ${idToken}`,
-                        },
-                    };
-                    return payloadHeader;
-                    // Send token to your backend via HTTPS
-                    // ...
-                }).then(function(payloadHeader){
-
-
-
+                return client.query({
+                    query: gql`
+                        {
+                          users{
+                            email
+                            points
+                          }
+                        }
+                    `
                 })
-                .catch(function(error) {
-                    // Handle error
+                .then(result => {
+                    //console.log('pre-result', result);
+                    return result;
                 });
-
             }
             catch (error) {
                 throw error
@@ -39,9 +49,24 @@ const GraphQL = {
 
         },
 
-        getUser: async args => {
+        getUser: async email => {
             try {
-
+                console.log('eargs', email);
+                return client.query({
+                    query: gql`
+                      query getUser($email: String!){ 
+                        getUser(email:$email){
+                            points
+                        }
+                    }`,
+                    variables: {
+                        email: "mp1pro@gmail.com"
+                    }
+                })
+                .then(result => {
+                    console.log('one-user1', result);
+                    return result;
+                });
             }
             catch (error) {
                 throw error

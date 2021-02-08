@@ -7,7 +7,11 @@ class Game extends React.Component {
     this.state = {}
   }
   
-  componentDidMount() {}
+  componentDidMount() {
+      console.log('game mount',this);
+      this.props.getUsers();
+      this.props.getUser();
+  }
   
   render() {
         return (

@@ -7,40 +7,70 @@ import Routes from './routes/routes';
 
 import fire from '../util/fire';
 
+import GraphQL from "../util/graphQL";
+
 class App extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
             auth: false,
-            user:'',
+            user_email:'',
             register:false
         }
         this.handleSignUp = this.handleSignUp.bind(this);
         this.login = this.login.bind(this);
         this.logout = this.logout.bind(this);
+        this.getUsers = this.getUsers.bind(this);
+        this.getUser = this.getUser.bind(this);
+    }
+    getUser(){
+
+        const {user_email} = this.state;
+        console.log(' I getUser', user_email);
+        GraphQL.getUser(user_email).then(user_ => {
+            console.log('one_user2', user_.data.user);
+            /*const user = user_.data.user;
+            this.setState(
+                {users: users},
+                localStorage.setItem("users", JSON.stringify(users))
+            );*/
+        });
+    }
+
+    getUsers(){
+        console.log(' I getUsers');
+        GraphQL.users().then(users_ => {
+            console.log('result', users_.data.users);
+            const users = users_.data.users;
+            this.setState(
+                {users: users},
+                localStorage.setItem("users", JSON.stringify(users))
+            );
+        });
     }
     
 
     login(email,password){
-        let user = '';
+        let user_email = '';
         fire.auth().signInWithEmailAndPassword(email, password)
         .then((userCredential) => {
-            // Signed in
-            const user = userCredential.user;
-            if (user !== ''){
+            // Signed inGraphQL
+            const user_email = userCredential.user.email;
+            console.log('userCredential', user_email);
+            if (user_email !== ''){
                 this.setState(
-                    {auth: true, user: user},
+                    {auth: true, user_email: user_email},
                     () => {
                         localStorage.setItem('loggedIn', 'true');
-                        localStorage.setItem('user', JSON.stringify(user));
+                        localStorage.setItem('user_email', JSON.stringify(user_email));
                         fire.auth().currentUser.getIdToken(true).then(function(idToken) {
-                            localStorage.setItem('token', JSON.stringify(idToken));
+                            localStorage.setItem('token', idToken);
+                            console.log( 'token type', typeof idToken);
                         }).catch(function(error) {
                             // Handle error
                             console.log('did not set currentuser ', error);
                         });
-
                     }
                 );
             }
@@ -86,18 +116,15 @@ class App extends React.Component {
     
     componentDidMount() {
 
-
         if(localStorage.getItem('loggedIn') === 'true' ){
             console.log('authmount: ', loggedIn);
             const loggedIn = localStorage.getItem("loggedIn");
-            this.setState({ auth: JSON.parse(loggedIn) })
+            this.setState({ auth: JSON.parse(loggedIn) });
 
         }
-        if (localStorage.getItem("user") != null) {
-            let userArray = localStorage.getItem("user");
-            if(userArray.length > 0){this.setState({ user: JSON.parse(userArray) })}
-             console.log('user local: ', JSON.parse(userArray));
-            console.log('user2 local: ', userArray);
+        if (localStorage.getItem("user_email") != null) {
+            let user_email = localStorage.getItem("user_email");
+            this.setState({ user_email: JSON.parse(user_email) });
         }
         //console.log("AuthbyLocal",this.state.auth);
     }
@@ -109,11 +136,14 @@ class App extends React.Component {
         
         return (
             <Routes 
-                auth={this.state.auth} 
+                auth={this.state.auth}
+                user_email={this.state.user_email}
                 register={this.state.register} 
                 login={this.login}  
                 logout={this.logout} 
-                handleSignUp = {this.handleSignUp} 
+                handleSignUp = {this.handleSignUp}
+                getUsers = {this.getUsers}
+                getUser = {this.getUser}
             />
         )
     }

@@ -43,7 +43,7 @@ class Routes extends React.Component {
         console.log('props_route ',this.props);
         console.log('this_route ',this);
         
-        const { auth, handleSignUp, login, register, logout } = this.props;
+        const { auth, handleSignUp, login, register, logout, getUsers, getUser } = this.props;
         
         return (
             <Router>
@@ -76,7 +76,7 @@ class Routes extends React.Component {
                             <Login login={login} auth = {auth}/>
                         </Route>
                         <PrivateRoute auth = {auth} exact path="/game">
-                            <Game />
+                            <Game getUsers={getUsers} getUser={getUser}/>
                         </PrivateRoute>
                     </Switch>
                     </div>
