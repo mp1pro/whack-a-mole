@@ -32,19 +32,19 @@ class App extends React.Component {
         console.log(' I getUser', user_email);
         GraphQL.getUser(user_email).then(user_ => {
             console.log('one_user2', user_.data.getUser.points);
-            /*const user = user_.data.user;
+            const points = user_.data.getUser.points || 0;
             this.setState(
-                {users: users},
-                localStorage.setItem("users", JSON.stringify(users))
-            );*/
+                {points: points},
+                localStorage.setItem("points", JSON.stringify(points))
+            );
         });
     }
 
     getUsers(){
         console.log(' I getUsers');
         GraphQL.users().then(users_ => {
-            console.log('result', users_.data.users);
-            const users = users_.data.users;
+            console.log('result_users', users_.data.users);
+            const users = users_.data.users || [];
             this.setState(
                 {users: users},
                 localStorage.setItem("users", JSON.stringify(users))
@@ -122,11 +122,19 @@ class App extends React.Component {
             console.log('authmount: ', loggedIn);
             const loggedIn = localStorage.getItem("loggedIn");
             this.setState({ auth: JSON.parse(loggedIn) });
-
         }
         if (localStorage.getItem("user_email") != null) {
             let user_email = localStorage.getItem("user_email");
             this.setState({ user_email: JSON.parse(user_email) });
+        }
+        if (localStorage.getItem("points") != null) {
+            let points = localStorage.getItem("points");
+            this.setState({ points: JSON.parse(points) });
+        }
+        if (localStorage.getItem("users") != null) {
+            let users= localStorage.getItem("users");
+            console.log('__users: ', users);
+            if(users.length > 0){this.setState({ users: JSON.parse(users) })}
         }
         //console.log("AuthbyLocal",this.state.auth);
     }
@@ -140,6 +148,8 @@ class App extends React.Component {
             <Routes 
                 auth={this.state.auth}
                 user_email={this.state.user_email}
+                points={this.state.points}
+                users={this.state.users}
                 register={this.state.register} 
                 login={this.login}  
                 logout={this.logout} 

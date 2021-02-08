@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Route, Link, Redirect, withRouter, Switch } fr
 
 import AuthMenu from '../views/components/authMenu';
 
+import DisPlay from '../views/components/DisPlay';
+
 import Login from '../views/Login';
 
 import Signup from '../views/Signup';
@@ -43,7 +45,18 @@ class Routes extends React.Component {
         console.log('props_route ',this.props);
         console.log('this_route ',this);
         
-        const { auth, handleSignUp, login, register, logout, getUsers, getUser } = this.props;
+        const {
+            auth,
+            handleSignUp,
+            login,
+            register,
+            logout,
+            getUsers,
+            getUser,
+            user_email,
+            points,
+            users
+        } = this.props;
         
         return (
             <Router>
@@ -61,6 +74,8 @@ class Routes extends React.Component {
                         </div>
                     </nav>
                     {/*CLOSE NAV*/}
+                    <hr />
+                    <DisPlay user_email={user_email} points={points} auth={auth} users={users}/>
                     <hr />
                     <Switch>
                         <Route exact path="/">
