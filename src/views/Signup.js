@@ -32,6 +32,7 @@ class Signup extends Component{
         console.log('this_sign ',this);
         if (register) return <Redirect to={{
             pathname: "/login",
+            state: { from: "/" }
         }}/>;
 
         return(

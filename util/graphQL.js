@@ -51,7 +51,7 @@ const GraphQL = {
 
         getUser: async email => {
             try {
-                console.log('eargs', email);
+                console.log('eargs', typeof email);
                 return client.query({
                     query: gql`
                       query getUser($email: String!){ 
@@ -60,11 +60,11 @@ const GraphQL = {
                         }
                     }`,
                     variables: {
-                        email: "mp1pro@gmail.com"
+                        email: email
                     }
                 })
                 .then(result => {
-                    console.log('one-user1', result);
+                    //console.log('one-user1', result);
                     return result;
                 });
             }

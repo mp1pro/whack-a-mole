@@ -16,6 +16,8 @@ class App extends React.Component {
         this.state = {
             auth: false,
             user_email:'',
+            points: 0,
+            users:[],
             register:false
         }
         this.handleSignUp = this.handleSignUp.bind(this);
@@ -29,7 +31,7 @@ class App extends React.Component {
         const {user_email} = this.state;
         console.log(' I getUser', user_email);
         GraphQL.getUser(user_email).then(user_ => {
-            console.log('one_user2', user_.data.user);
+            console.log('one_user2', user_.data.getUser.points);
             /*const user = user_.data.user;
             this.setState(
                 {users: users},
