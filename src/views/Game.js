@@ -1,5 +1,8 @@
 import React from 'react';
 
+import Hole from './components/Hole';
+import Mole from './components/Mole';
+
 class Game extends React.Component {
   constructor(props) {
     super(props);
@@ -15,8 +18,10 @@ class Game extends React.Component {
   
   render() {
         return (
-            <div>
-                <h1>GAME</h1>
+            <div className="game-container ">
+                <Mole>
+                    <h1>GAME</h1>
+                </Mole>
             </div>
         )
   }
