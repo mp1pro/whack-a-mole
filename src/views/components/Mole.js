@@ -2,9 +2,14 @@ import React from 'react';
 
 
 function Mole(props) {
+    const {random,index} = props;
+    console.log('random', random + 'index' + index);
 
     return (
-        <div className="mole">
+        //TODO set style ternary here to toggle mole
+        <div
+            className={`mole ${random === index ? 'topAn' : ''}`}
+        >
 
         </div>
     );

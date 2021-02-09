@@ -11,16 +11,24 @@
             background-color: greenyellow;
             border-radius: 50%;
             position: absolute;
-            top:60px;
+            top:120px;
 
+            -webkit-transition:top 0.25s ease-in;
+            -moz-transition:top 0.25s ease-in;
+            -o-transition:top 0.25s ease-in;
+            transition:top 0.25s ease-in;
+        }
+        .mole.topAn{
+            top:30px;
         }
         .game-container {
             display: flex;
             flex-wrap: wrap;
+            justify-content: space-between;
             background-color: DodgerBlue;
             overflow: hidden;
         }
-
+        /*HOLE*/
         .game-container > div {
             background-color: #f1f1f1;
             width: 33%;
