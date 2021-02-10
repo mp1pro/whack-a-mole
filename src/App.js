@@ -18,14 +18,24 @@ class App extends React.Component {
             user_email:'',
             points: 0,
             users:[],
-            register:false
+            register:false,
+            interval:1000
         }
         this.handleSignUp = this.handleSignUp.bind(this);
         this.login = this.login.bind(this);
         this.logout = this.logout.bind(this);
         this.getUsers = this.getUsers.bind(this);
         this.getUser = this.getUser.bind(this);
+        this.setInterval = this.setInterval.bind(this);
     }
+    setInterval(inter){
+        console.log('inter', inter);
+        this.setState(
+            {interval: inter},
+            localStorage.setItem("interval", JSON.stringify(inter))
+        );
+    }
+
     getUser(){
 
         const {user_email} = this.state;
@@ -150,12 +160,14 @@ class App extends React.Component {
                 user_email={this.state.user_email}
                 points={this.state.points}
                 users={this.state.users}
-                register={this.state.register} 
+                register={this.state.register}
+                interval = {this.state.interval}
                 login={this.login}  
                 logout={this.logout} 
                 handleSignUp = {this.handleSignUp}
                 getUsers = {this.getUsers}
                 getUser = {this.getUser}
+                setInterval = {this.setInterval}
             />
         )
     }

@@ -6,6 +6,8 @@ import AuthMenu from '../views/components/authMenu';
 
 import DisPlay from '../views/components/DisPlay';
 
+import GameCon from '../views/components/GameCon';
+
 import Login from '../views/Login';
 
 import Signup from '../views/Signup';
@@ -55,7 +57,9 @@ class Routes extends React.Component {
             getUser,
             user_email,
             points,
-            users
+            users,
+            setInterval,
+            interval
         } = this.props;
         
         return (
@@ -91,7 +95,8 @@ class Routes extends React.Component {
                             <Login login={login} auth = {auth}/>
                         </Route>
                         <PrivateRoute auth = {auth} exact path="/game">
-                            <Game getUsers={getUsers} getUser={getUser}/>
+                            <GameCon setInterval = {setInterval} />
+                            <Game getUsers={getUsers} getUser={getUser} interval = {interval}/>
                         </PrivateRoute>
                     </Switch>
                     </div>

@@ -10,7 +10,6 @@ class Game extends React.Component {
     this.state = {
         random:8,
         grid:3,
-        interval:2000,
         bit:false
     }
     this.genRan = this.genRan.bind(this);
@@ -30,6 +29,12 @@ class Game extends React.Component {
   // game logic
   game(){
       let random = this.genRan();
+      clearInterval(this.intervalId)
+
+      this.intervalId = setInterval(
+          this.game,
+          this.props.interval
+      );
 
       this.setState((prevState) => ({
           bit: !prevState.bit, random:random
@@ -37,7 +42,7 @@ class Game extends React.Component {
   }
 
   componentDidMount() {
-      const {interval} = this.state;
+      const {interval} = this.props;
 
       console.log('game mount',this);
       // get users if local not set
@@ -58,6 +63,7 @@ class Game extends React.Component {
   }
 
   render() {
+      console.log('game mount ren', this.props.interval);
     const {random,grid} = this.state;
     return (
         <div className="game-container ">
