@@ -10,7 +10,8 @@ class Game extends React.Component {
     this.state = {
         random:8,
         grid:3,
-        interval:2000
+        interval:2000,
+        bit:false
     }
     this.genRan = this.genRan.bind(this);
     this.game = this.game.bind(this);
@@ -18,16 +19,21 @@ class Game extends React.Component {
 
   // random num gen
   genRan(){
-      const {grid} = this.state;
-      let random = Math.trunc(Math.random() * ((grid*grid) + 1));
-      return random;
+      const {grid,random} = this.state;
+
+      let random_ = Math.trunc(Math.random() * (grid*grid));
+
+      //stop mole from appearing twice in the same hole consecutively
+      return (random === random_ ? (Math.abs(random_-1)) : random_)
   }
+
   // game logic
   game(){
       let random = this.genRan();
-      this.setState(
-          {random: random}
-      );
+
+      this.setState((prevState) => ({
+          bit: !prevState.bit, random:random
+      }));
   }
 
   componentDidMount() {
