@@ -22,23 +22,26 @@ class GameCon extends React.Component {
         );
     }
     render(){
+        const {interval,play_points} = this.props;
         return (
             <div>
                 <select
                     className="interval"
                     name="interval"
                     id="interval"
-                    value={this.props.interval}
+                    value={interval}
                     onChange={this.handleChange}
                 >
                     <option value="1000">EASY</option>
                     <option value="500">MEDIUM</option>
                     <option value="250">HARD</option>
                 </select>
+                &nbsp;
+                <span>Moles Whacked : </span><span className='red'>{play_points}</span>
                 <hr/>
             </div>
         )
     }
-};
+}
 
 export default GameCon;

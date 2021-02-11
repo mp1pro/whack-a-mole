@@ -2,6 +2,7 @@ import React from 'react';
 
 import Hole from './components/Hole';
 import Mole from './components/Mole';
+import GameCon from "./components/GameCon";
 
 class Game extends React.Component {
   constructor(props) {
@@ -10,10 +11,19 @@ class Game extends React.Component {
     this.state = {
         random:8,
         grid:3,
-        bit:false
+        bit:false,
+        play_points: 0
     }
     this.genRan = this.genRan.bind(this);
     this.game = this.game.bind(this);
+    this.addPoints = this.addPoints.bind(this);
+  }
+
+  addPoints(){
+      console.log('handleClick()');
+      this.setState((prevState) => ({
+        play_points:prevState.play_points+1
+      }));
   }
 
   // random num gen
@@ -63,14 +73,22 @@ class Game extends React.Component {
   }
 
   render() {
-      console.log('game mount ren', this.props.interval);
-    const {random,grid} = this.state;
+    console.log('game mount ren', this.props.interval);
+    console.log('play_points', this.state.play_points);
+
+    const {random,grid,play_points} = this.state;
+    const {addPoints} = this;
+    const {setInterval} = this.props;
+
     return (
-        <div className="game-container ">
-            <Hole grid={grid}>
-                {/*past in random prop 0 to 8 here set from interval*/}
-                <Mole random={random}>GAME</Mole>
-            </Hole>
+        <div>
+            <GameCon setInterval={setInterval} play_points={play_points}/>
+            <div className="game-container ">
+                <Hole grid={grid}>
+                    {/*past in random prop 0 to 8 here set from interval*/}
+                    <Mole random={random} addPoints={addPoints}>GAME</Mole>
+                </Hole>
+            </div>
         </div>
     )
   }
