@@ -3,6 +3,7 @@ import React from 'react';
 import Hole from './components/Hole';
 import Mole from './components/Mole';
 import GameCon from "./components/GameCon";
+import {Redirect} from "react-router-dom";
 
 class Game extends React.Component {
   constructor(props) {
@@ -12,11 +13,17 @@ class Game extends React.Component {
         random:8,
         grid:3,
         bit:false,
-        play_points: 0
+        play_points: 0,
+        stop:false
     }
     this.genRan = this.genRan.bind(this);
     this.game = this.game.bind(this);
     this.addPoints = this.addPoints.bind(this);
+    this.stop = this.stop.bind(this);
+  }
+
+  stop(){
+      clearInterval(this.intervalId);
   }
 
   addPoints(){
@@ -66,6 +73,17 @@ class Game extends React.Component {
           this.game,
           interval
       );
+      setTimeout(() => { clearInterval(this.intervalId); console.log('clear timer');}, 5000);
+  }
+
+  stop(){
+    console.log('STOP');
+
+    this.setState({
+      stop: true
+    });
+
+    clearInterval(this.intervalId);
   }
 
   componentWillUnmount(){
@@ -76,9 +94,12 @@ class Game extends React.Component {
     console.log('game mount ren', this.props.interval);
     console.log('play_points', this.state.play_points);
 
-    const {random,grid,play_points} = this.state;
+    const {random,grid,play_points,stop} = this.state;
     const {addPoints} = this;
     const {setInterval} = this.props;
+
+    console.log('stop', stop);
+    if (stop === true) return <Redirect to="/start" />;
 
     return (
         <div>
