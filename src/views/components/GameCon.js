@@ -22,7 +22,7 @@ class GameCon extends React.Component {
         );
     }
     render(){
-        const {interval,play_points} = this.props;
+        const {interval,play_points,ticker} = this.props;
         return (
             <div>
                 <select
@@ -38,6 +38,7 @@ class GameCon extends React.Component {
                 </select>
                 &nbsp;
                 <span>Moles Whacked : </span><span className='red'>{play_points}</span>
+                <span> Countdown : </span><span >{ticker}</span>
                 <hr/>
             </div>
         )

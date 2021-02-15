@@ -14,16 +14,19 @@ class Game extends React.Component {
         grid:3,
         bit:false,
         play_points: 0,
-        stop:false
+        stop:false,
+        ticker:60
     }
+    this.tick = this.tick.bind(this);
     this.genRan = this.genRan.bind(this);
     this.game = this.game.bind(this);
     this.addPoints = this.addPoints.bind(this);
     this.stop = this.stop.bind(this);
+
   }
 
   stop(){
-      clearInterval(this.intervalId);
+      //clearInterval(this.intervalId);
   }
 
   addPoints(){
@@ -58,6 +61,19 @@ class Game extends React.Component {
       }));
   }
 
+  tick(){
+        if (this.state.ticker > 0) {
+            console.log('something');
+            this.setState((prevState) => ({
+                ticker: prevState.ticker-1
+            }));
+        } else {
+            console.log('something');
+            clearInterval(this.timer);
+            window.location.reload();
+        }
+  }
+
   componentDidMount() {
       const {interval} = this.props;
 
@@ -73,7 +89,14 @@ class Game extends React.Component {
           this.game,
           interval
       );
-      setTimeout(() => { clearInterval(this.intervalId); console.log('clear timer');}, 5000);
+      this.timer = setInterval(()=>{this.tick()}, 1000);
+      /*setTimeout(
+          () => {
+              clearInterval(this.intervalId);
+              console.log('clear timer');
+          }
+          , 5000
+      );*/
   }
 
   stop(){
@@ -94,7 +117,7 @@ class Game extends React.Component {
     console.log('game mount ren', this.props.interval);
     console.log('play_points', this.state.play_points);
 
-    const {random,grid,play_points,stop} = this.state;
+    const {random,grid,play_points,stop,ticker} = this.state;
     const {addPoints} = this;
     const {setInterval} = this.props;
 
@@ -103,7 +126,7 @@ class Game extends React.Component {
 
     return (
         <div>
-            <GameCon setInterval={setInterval} play_points={play_points}/>
+            <GameCon setInterval={setInterval} play_points={play_points} ticker={ticker}/>
             <div className="game-container ">
                 <Hole grid={grid}>
                     {/*past in random prop 0 to 8 here set from interval*/}
