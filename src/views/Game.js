@@ -15,18 +15,12 @@ class Game extends React.Component {
         bit:false,
         play_points: 0,
         stop:false,
-        ticker:60
+        ticker:2
     }
     this.tick = this.tick.bind(this);
     this.genRan = this.genRan.bind(this);
     this.game = this.game.bind(this);
     this.addPoints = this.addPoints.bind(this);
-    this.stop = this.stop.bind(this);
-
-  }
-
-  stop(){
-      //clearInterval(this.intervalId);
   }
 
   addPoints(){
@@ -68,9 +62,15 @@ class Game extends React.Component {
                 ticker: prevState.ticker-1
             }));
         } else {
-            console.log('something');
+            console.log('should stop');
             clearInterval(this.timer);
-            window.location.reload();
+            clearInterval(this.intervalId);
+            this.setState((prevState) => ({
+                stop: !prevState.stop
+            }));
+
+
+            //window.location.replace("/end");
         }
   }
 
@@ -99,16 +99,6 @@ class Game extends React.Component {
       );*/
   }
 
-  stop(){
-    console.log('STOP');
-
-    this.setState({
-      stop: true
-    });
-
-    clearInterval(this.intervalId);
-  }
-
   componentWillUnmount(){
     clearInterval(this.intervalId)
   }
@@ -121,8 +111,8 @@ class Game extends React.Component {
     const {addPoints} = this;
     const {setInterval} = this.props;
 
-    console.log('stop', stop);
-    if (stop === true) return <Redirect to="/start" />;
+    console.log('stop: ', stop);
+    if (stop === true) return <Redirect to="/end" />;
 
     return (
         <div>

@@ -18,6 +18,8 @@ import About from '../views/About';
 
 import Game from '../views/Game';
 
+import End from '../views/End';
+
 //PrivateRoute Login
 function PrivateRoute({ children, auth, ...rest }) {
     return (
@@ -87,6 +89,9 @@ class Routes extends React.Component {
                         </Route>
                         <Route exact path="/about">
                             <About />
+                        </Route>
+                        <Route exact path="/end">
+                            <End />
                         </Route>
                         <Route exact path="/signup">
                             <Signup handleSignUp={handleSignUp} register={register}/>
