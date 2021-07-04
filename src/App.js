@@ -14,7 +14,7 @@ class App extends React.Component {
         super(props);
 
         this.state = {
-            auth: false,
+            auth: true,
             user_email:'',
             points: 0,
             users:[],
