@@ -99,9 +99,14 @@ class Routes extends React.Component {
                         <Route exact path="/login">
                             <Login login={login} auth = {auth}/>
                         </Route>
+                        /*
                         <PrivateRoute auth = {auth} exact path="/game">
                             <Game getUsers={getUsers} getUser={getUser} interval = {interval}/>
                         </PrivateRoute>
+                        */
+                        <Route auth = {auth} exact path="/game">
+                            <Game getUsers={getUsers} getUser={getUser} interval = {interval}/>
+                        </Route>
                     </Switch>
                     </div>
             </Router>

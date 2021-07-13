@@ -15,7 +15,7 @@ class Game extends React.Component {
         bit:false,
         play_points: 0,
         stop:false,
-        ticker:2
+        ticker:2    
     }
     this.tick = this.tick.bind(this);
     this.genRan = this.genRan.bind(this);
