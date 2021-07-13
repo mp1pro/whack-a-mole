@@ -79,17 +79,27 @@ class Game extends React.Component {
 
       console.log('game mount',this);
       // get users if local not set
-      this.props.getUsers();
+      //this.props.getUsers();
       // get user if local not set
-      this.props.getUser();
+      //this.props.getUser();
 
-      //trigger set-interval;
-      //create interval to run every second
-      this.intervalId = setInterval(
-          this.game,
-          interval
-      );
-      this.timer = setInterval(()=>{this.tick()}, 1000);
+      
+        // wait 3 sends before game start
+        setTimeout(() => {
+            //trigger set-interval;
+            this.intervalId = setInterval(
+                this.game,
+                interval
+            );
+            //create interval to run every second
+            this.timer = setInterval(
+                this.tick,
+                1000
+            );
+
+        }, 3000);
+      
+      
       /*setTimeout(
           () => {
               clearInterval(this.intervalId);
