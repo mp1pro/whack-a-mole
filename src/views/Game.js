@@ -13,7 +13,7 @@ class Game extends React.Component {
         random:8,
         grid:3,
         bit:false,
-        play_points: 0,
+        
         stop:false,
         ticker:2    
     }
@@ -25,9 +25,7 @@ class Game extends React.Component {
 
   addPoints(){
       console.log('handleClick()');
-      this.setState((prevState) => ({
-        play_points:prevState.play_points+1
-      }));
+      this.props.addPoints();
   }
 
   // random num gen
@@ -114,18 +112,22 @@ class Game extends React.Component {
   }
 
   render() {
-    console.log('game mount ren', this.props.interval);
-    console.log('play_points', this.state.play_points);
+    console.log('game mount ren', this.props);
+    console.log('play_points', this.props.play_points);
 
-    const {random,grid,play_points,stop,ticker} = this.state;
+    const {random,grid,stop,ticker} = this.state;
     const {addPoints} = this;
-    const {setInterval} = this.props;
+    const {setInterval,play_points} = this.props;
 
     console.log('stop: ', stop);
-    if (stop === true) return <Redirect to="/end" />;
+    //x`x`  if (stop === true) return <Redirect to="/end" />;
 
     return (
         <div>
+            {/*put count down timer here*/}
+            <div className="count-down">
+                Wait to play
+            </div>
             <GameCon setInterval={setInterval} play_points={play_points} ticker={ticker}/>
             <div className="game-container ">
                 <Hole grid={grid}>

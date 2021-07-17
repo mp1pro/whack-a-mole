@@ -43,6 +43,10 @@ function PrivateRoute({ children, auth, ...rest }) {
 //close PrivateRoute Login
 
 class Routes extends React.Component {
+    constructor(props) {
+        super(props);
+    } 
+    
     render() {
         console.log("Did I mount routes3");
         
@@ -61,7 +65,9 @@ class Routes extends React.Component {
             points,
             users,
             setInterval,
-            interval
+            interval,
+            play_points,
+            addPoints
         } = this.props;
         
         return (
@@ -77,12 +83,14 @@ class Routes extends React.Component {
                                 </Link>*/}
                             </div> 
                             <AuthMenu auth={auth} logout={logout}/>
+                            {/*<DisPlay user_email={user_email} points={points} auth={auth} users={users}/>*/}
+                            {/*<GameCon setInterval={setInterval} play_points={play_points} ticker={ticker}/>*/}
+                            <hr />
                         </div>
                     </nav>
                     {/*CLOSE NAV*/}
                     <hr />
-                    <DisPlay user_email={user_email} points={points} auth={auth} users={users}/>
-                    <hr />
+                    
                     <Switch>
                         <Route exact path="/">
                             <Start />
@@ -99,13 +107,19 @@ class Routes extends React.Component {
                         <Route exact path="/login">
                             <Login login={login} auth = {auth}/>
                         </Route>
-                        /*
+                        {/*
                         <PrivateRoute auth = {auth} exact path="/game">
                             <Game getUsers={getUsers} getUser={getUser} interval = {interval}/>
                         </PrivateRoute>
-                        */
+                        */}
                         <Route auth = {auth} exact path="/game">
-                            <Game getUsers={getUsers} getUser={getUser} interval = {interval}/>
+                            <Game 
+                                getUsers = {getUsers} 
+                                getUser = {getUser} 
+                                play_points = {play_points} 
+                                interval = {interval} 
+                                addPoints = {addPoints}
+                            />
                         </Route>
                     </Switch>
                     </div>

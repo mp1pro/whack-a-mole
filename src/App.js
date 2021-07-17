@@ -19,6 +19,7 @@ class App extends React.Component {
             points: 0,
             users:[],
             register:false,
+            play_points: 0,
             interval:1000
         }
         this.handleSignUp = this.handleSignUp.bind(this);
@@ -27,7 +28,15 @@ class App extends React.Component {
         this.getUsers = this.getUsers.bind(this);
         this.getUser = this.getUser.bind(this);
         this.setInterval = this.setInterval.bind(this);
+        this.addPoints = this.addPoints.bind(this);
     }
+    addPoints(){
+      console.log('handleClick()');
+      this.setState((prevState) => ({
+        play_points:prevState.play_points+1
+      }));
+    }
+    
     setInterval(inter){
         console.log('inter', inter);
         this.setState(
@@ -157,6 +166,7 @@ class App extends React.Component {
         return (
             <Routes 
                 auth={this.state.auth}
+                play_points={this.state.play_points}
                 user_email={this.state.user_email}
                 points={this.state.points}
                 users={this.state.users}
@@ -168,6 +178,7 @@ class App extends React.Component {
                 getUsers = {this.getUsers}
                 getUser = {this.getUser}
                 setInterval = {this.setInterval}
+                addPoints = {this.addPoints}
             />
         )
     }
