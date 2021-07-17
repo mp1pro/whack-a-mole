@@ -29,7 +29,7 @@ class App extends React.Component {
         this.logout = this.logout.bind(this);
         this.getUsers = this.getUsers.bind(this);
         this.getUser = this.getUser.bind(this);
-        this.setInterval = this.setInterval.bind(this);
+        this.set_Interval = this.set_Interval.bind(this);
         this.addPoints = this.addPoints.bind(this);
         this.tick = this.tick.bind(this);
     }
@@ -58,7 +58,7 @@ class App extends React.Component {
       }));
     }
     
-    setInterval(inter){
+    set_Interval(inter){
         console.log('inter', inter);
         this.setState(
             {interval: inter},
@@ -201,7 +201,7 @@ class App extends React.Component {
                 handleSignUp = {this.handleSignUp}
                 getUsers = {this.getUsers}
                 getUser = {this.getUser}
-                setInterval = {this.setInterval}
+                set_Interval = {this.set_Interval}
                 addPoints = {this.addPoints}
                 
             />

@@ -64,7 +64,7 @@ class Routes extends React.Component {
             user_email,
             points,
             users,
-            setInterval,
+            set_Interval,
             interval,
             play_points,
             addPoints,
@@ -121,6 +121,7 @@ class Routes extends React.Component {
                                 getUser = {getUser} 
                                 play_points = {play_points} 
                                 interval = {interval} 
+                                set_Interval = {set_Interval} 
                                 addPoints = {addPoints}
                                 tick = {tick}
                                 ticker = {ticker}

@@ -17,7 +17,7 @@ class GameCon extends React.Component {
                 //pass in value directly
                 const {interval} = this.state;
                 console.log("state", interval)
-                this.props.setInterval(interval)
+                this.props.set_Interval(interval)
             }
         );
     }

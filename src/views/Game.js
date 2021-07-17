@@ -100,7 +100,7 @@ class Game extends React.Component {
 
     const {random,grid} = this.state;
     const {addPoints} = this;
-    const {setInterval,play_points,ticker,stop} = this.props;
+    const {set_Interval,play_points,ticker,stop} = this.props;
 
     console.log('stop: ', stop);
     //x`x`  if (stop === true) return <Redirect to="/end" />;
@@ -117,7 +117,7 @@ class Game extends React.Component {
             <div className="count-down">
                 Wait to play
             </div>
-            <GameCon setInterval={setInterval} play_points={play_points} ticker={ticker}/>
+            <GameCon set_Interval={set_Interval} play_points={play_points} ticker={ticker}/>
             <div className="game-container ">
                 <Hole grid={grid}>
                     {/*past in random prop 0 to 8 here set from interval*/}
