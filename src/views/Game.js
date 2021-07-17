@@ -12,16 +12,16 @@ class Game extends React.Component {
     this.state = {
         random:8,
         grid:3,
-        bit:false,
-        
-        stop:false,
-        ticker:2    
+        bit:false
     }
     this.tick = this.tick.bind(this);
     this.genRan = this.genRan.bind(this);
     this.game = this.game.bind(this);
     this.addPoints = this.addPoints.bind(this);
   }
+    tick(){
+      this.props.tick();
+    }
 
   addPoints(){
       console.log('handleClick()');
@@ -53,27 +53,10 @@ class Game extends React.Component {
       }));
   }
 
-  tick(){
-        if (this.state.ticker > 0) {
-            console.log('something');
-            this.setState((prevState) => ({
-                ticker: prevState.ticker-1
-            }));
-        } else {
-            console.log('should stop');
-            clearInterval(this.timer);
-            clearInterval(this.intervalId);
-            this.setState((prevState) => ({
-                stop: !prevState.stop
-            }));
 
-
-            //window.location.replace("/end");
-        }
-  }
 
   componentDidMount() {
-      const {interval} = this.props;
+      const {interval,stop} = this.props;
 
       console.log('game mount',this);
       // get users if local not set
@@ -96,7 +79,7 @@ class Game extends React.Component {
             );
 
         }, 3000);
-      
+
       
       /*setTimeout(
           () => {
@@ -115,12 +98,18 @@ class Game extends React.Component {
     console.log('game mount ren', this.props);
     console.log('play_points', this.props.play_points);
 
-    const {random,grid,stop,ticker} = this.state;
+    const {random,grid} = this.state;
     const {addPoints} = this;
-    const {setInterval,play_points} = this.props;
+    const {setInterval,play_points,ticker,stop} = this.props;
 
     console.log('stop: ', stop);
     //x`x`  if (stop === true) return <Redirect to="/end" />;
+    
+    // if ticker is 0 clear timers
+    if(stop){
+        clearInterval(this.timer);
+        clearInterval(this.intervalId);
+    }
 
     return (
         <div>

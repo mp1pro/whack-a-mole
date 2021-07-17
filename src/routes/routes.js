@@ -67,7 +67,10 @@ class Routes extends React.Component {
             setInterval,
             interval,
             play_points,
-            addPoints
+            addPoints,
+            tick,
+            ticker,
+            stop
         } = this.props;
         
         return (
@@ -119,6 +122,9 @@ class Routes extends React.Component {
                                 play_points = {play_points} 
                                 interval = {interval} 
                                 addPoints = {addPoints}
+                                tick = {tick}
+                                ticker = {ticker}
+                                stop = {stop}
                             />
                         </Route>
                     </Switch>

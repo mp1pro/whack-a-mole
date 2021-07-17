@@ -20,7 +20,9 @@ class App extends React.Component {
             users:[],
             register:false,
             play_points: 0,
-            interval:1000
+            interval: 1000,
+            ticker: 4,
+            stop: false
         }
         this.handleSignUp = this.handleSignUp.bind(this);
         this.login = this.login.bind(this);
@@ -29,6 +31,25 @@ class App extends React.Component {
         this.getUser = this.getUser.bind(this);
         this.setInterval = this.setInterval.bind(this);
         this.addPoints = this.addPoints.bind(this);
+        this.tick = this.tick.bind(this);
+    }
+    tick(){
+        if (this.state.ticker > 0) {
+            console.log('something');
+            this.setState((prevState) => ({
+                ticker: prevState.ticker-1
+            }));
+        } else {
+            console.log('should stop');
+            clearInterval(this.timer);
+            clearInterval(this.intervalId);
+            this.setState((prevState) => ({
+                stop: !prevState.stop
+            }));
+
+
+            //window.location.replace("/end");
+        }
     }
     addPoints(){
       console.log('handleClick()');
@@ -161,7 +182,7 @@ class App extends React.Component {
     render() {
     
         //console.log('isUserLoggedIn',localStorage.getItem('loggedIn'));
-        console.log("Did I mount routes APPS");
+        console.log("Did I mount routes APPS",this.state.ticker);
         
         return (
             <Routes 
@@ -171,7 +192,10 @@ class App extends React.Component {
                 points={this.state.points}
                 users={this.state.users}
                 register={this.state.register}
-                interval = {this.state.interval}
+                interval={this.state.interval}
+                stop={this.state.stop}
+                ticker={this.state.ticker}
+                tick={this.tick}
                 login={this.login}  
                 logout={this.logout} 
                 handleSignUp = {this.handleSignUp}
@@ -179,6 +203,7 @@ class App extends React.Component {
                 getUser = {this.getUser}
                 setInterval = {this.setInterval}
                 addPoints = {this.addPoints}
+                
             />
         )
     }
