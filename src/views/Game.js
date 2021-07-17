@@ -117,7 +117,7 @@ class Game extends React.Component {
             <div className="count-down">
                 Wait to play
             </div>
-            <GameCon set_Interval={set_Interval} play_points={play_points} ticker={ticker}/>
+            {/*<GameCon set_Interval={set_Interval} play_points={play_points} ticker={ticker}/>*/}
             <div className="game-container ">
                 <Hole grid={grid}>
                     {/*past in random prop 0 to 8 here set from interval*/}

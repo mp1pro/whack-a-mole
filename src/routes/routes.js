@@ -87,8 +87,8 @@ class Routes extends React.Component {
                             </div> 
                             <AuthMenu auth={auth} logout={logout}/>
                             {/*<DisPlay user_email={user_email} points={points} auth={auth} users={users}/>*/}
-                            {/*<GameCon setInterval={setInterval} play_points={play_points} ticker={ticker}/>*/}
-                            <hr />
+                            <GameCon setInterval={setInterval} play_points={play_points} ticker={ticker}/>
+                            
                         </div>
                     </nav>
                     {/*CLOSE NAV*/}

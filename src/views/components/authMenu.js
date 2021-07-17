@@ -3,7 +3,7 @@ import { withRouter, Link } from "react-router-dom";
  
 const AuthMenu = withRouter(
   ({ history, auth, logout }) => auth ? (
-        <div className="">
+        <span className="">
             <button
                 onClick={() => {
                     logout();
@@ -13,9 +13,9 @@ const AuthMenu = withRouter(
                 Sign out
             </button>
            
-        </div>
+        </span>
     ) : (
-        <div className="sign_bar">
+        <span className="sign_bar">
         
             <Link className="menu" to={{pathname: '/signup'}}>
                 Sign Up
@@ -26,7 +26,7 @@ const AuthMenu = withRouter(
             <Link className="menu" to={{pathname: '/login', state: { from: location.pathname }}}>
                 Sign In
             </Link>
-        </div>
+        </span>
     )
 );
 
