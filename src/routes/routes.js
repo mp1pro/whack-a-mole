@@ -70,7 +70,9 @@ class Routes extends React.Component {
             addPoints,
             tick,
             ticker,
-            stop
+            stop,
+            width,
+            height
         } = this.props;
         
         return (
@@ -126,6 +128,8 @@ class Routes extends React.Component {
                                 tick = {tick}
                                 ticker = {ticker}
                                 stop = {stop}
+                                width = {width}
+                                height = {height}
                             />
                         </Route>
                     </Switch>

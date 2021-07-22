@@ -22,7 +22,9 @@ class App extends React.Component {
             play_points: 0,
             interval: 1000,
             ticker: 4,
-            stop: false
+            stop: false,
+            width: 0,
+            height: 0
         }
         this.handleSignUp = this.handleSignUp.bind(this);
         this.login = this.login.bind(this);
@@ -32,7 +34,17 @@ class App extends React.Component {
         this.set_Interval = this.set_Interval.bind(this);
         this.addPoints = this.addPoints.bind(this);
         this.tick = this.tick.bind(this);
+        this.updateWindow = this.updateWindow.bind(this);
     }
+    
+    updateWindow() {
+        this.setState({ 
+            width: window.innerWidth, 
+            height: window.innerHeight 
+        });
+    }
+
+    
     tick(){
         if (this.state.ticker > 0) {
             console.log('something');
@@ -157,6 +169,8 @@ class App extends React.Component {
     };
     
     componentDidMount() {
+        this.updateWindow();
+        window.addEventListener('resize', this.updateWindow);
 
         if(localStorage.getItem('loggedIn') === 'true' ){
             console.log('authmount: ', loggedIn);
@@ -179,10 +193,15 @@ class App extends React.Component {
         //console.log("AuthbyLocal",this.state.auth);
     }
     
+    componentWillUnmount() {
+        window.removeEventListener('resize', this.updateWindow);
+    }
+    
     render() {
     
         //console.log('isUserLoggedIn',localStorage.getItem('loggedIn'));
         console.log("Did I mount routes APPS",this.state.ticker);
+        console.log('width',this.state.width,'height',this.state.height);
         
         return (
             <Routes 
@@ -195,6 +214,8 @@ class App extends React.Component {
                 interval={this.state.interval}
                 stop={this.state.stop}
                 ticker={this.state.ticker}
+                width={this.state.width}
+                height={this.state.height}
                 tick={this.tick}
                 login={this.login}  
                 logout={this.logout} 
