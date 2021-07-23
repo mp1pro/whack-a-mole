@@ -12,12 +12,15 @@ class Game extends React.Component {
     this.state = {
         random:8,
         grid:3,
-        bit:false
+        bit:false,
+        countdown: 3
     }
     this.tick = this.tick.bind(this);
     this.genRan = this.genRan.bind(this);
     this.game = this.game.bind(this);
     this.addPoints = this.addPoints.bind(this);
+    this.countdown_timer = this.countdown_timer.bind(this);
+    
   }
     tick(){
       this.props.tick();
@@ -52,6 +55,19 @@ class Game extends React.Component {
           bit: !prevState.bit, random:random
       }));
   }
+  
+  countdown_timer(){
+      
+    this.setState({
+      countdown: this.state.countdown - 1
+    });
+      
+    if (this.state.countdown === 0) { 
+      clearInterval(this.countdown);
+    }
+    //TODO start game here
+    //move countdown screen here
+  }
 
 
 
@@ -79,6 +95,11 @@ class Game extends React.Component {
             );
 
         }, 3000);
+        
+        this.countdown = setInterval(
+                this.countdown_timer,
+                1000
+        );
 
       
       /*setTimeout(
@@ -91,7 +112,8 @@ class Game extends React.Component {
   }
 
   componentWillUnmount(){
-    clearInterval(this.intervalId)
+    clearInterval(this.intervalId);
+    clearInterval(this.countdown);
   }
 
   render() {
@@ -112,14 +134,16 @@ class Game extends React.Component {
     }
 
     return (
-        <div>
+        <div className="game-con">
             {/*put count down timer here*/}
-            <div 
-                className="count-down"
-                style={{width: width,height: height-28}}
-            >
-                Wait to play
-            </div>
+            { this.state.countdown != 0 &&
+                <div 
+                    className="count-down"
+                    style={{width: width,height: height-28}}
+                >
+                    {this.state.countdown}
+                </div>
+            }
             {/*<GameCon set_Interval={set_Interval} play_points={play_points} ticker={ticker}/>*/}
             <div 
                 className="game-container "
