@@ -91,7 +91,7 @@ class Game extends React.Component {
             //create interval to run every second
             this.timer = setInterval(
                 this.tick,
-                1000
+                2000
             );
 
         }, 3000);

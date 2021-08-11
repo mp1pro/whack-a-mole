@@ -20,8 +20,8 @@ class App extends React.Component {
             users:[],
             register:false,
             play_points: 0,
-            interval: 1000,
-            ticker: 4,
+            interval: 2000,
+            ticker: 8,
             stop: false,
             width: 0,
             height: 0
@@ -64,7 +64,6 @@ class App extends React.Component {
         }
     }
     addPoints(){
-      console.log('handleClick()');
       this.setState((prevState) => ({
         play_points:prevState.play_points+1
       }));
