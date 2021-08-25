@@ -20,8 +20,8 @@ class App extends React.Component {
             users:[],
             register:false,
             play_points: 0,
-            interval: 2000,
-            ticker: 8,
+            interval: 1000,
+            ticker: 3,
             stop: false,
             width: 0,
             height: 0
@@ -35,6 +35,7 @@ class App extends React.Component {
         this.addPoints = this.addPoints.bind(this);
         this.tick = this.tick.bind(this);
         this.updateWindow = this.updateWindow.bind(this);
+        this.resetGame = this.resetGame.bind(this);
     }
     
     updateWindow() {
@@ -43,7 +44,17 @@ class App extends React.Component {
             height: window.innerHeight 
         });
     }
-
+    
+    resetGame(){
+        console.log('reset');
+        this.setState(
+            {
+                ticker: 3
+                ,
+                stop: false
+            }
+        );
+    }
     
     tick(){
         if (this.state.ticker > 0) {
@@ -55,10 +66,11 @@ class App extends React.Component {
             console.log('should stop');
             clearInterval(this.timer);
             clearInterval(this.intervalId);
+            ///*
             this.setState((prevState) => ({
                 stop: !prevState.stop
             }));
-
+            //*/
 
             //window.location.replace("/end");
         }
@@ -199,7 +211,7 @@ class App extends React.Component {
     render() {
     
         //console.log('isUserLoggedIn',localStorage.getItem('loggedIn'));
-        console.log("Did I mount routes APPS",this.state.ticker);
+        console.log("aPPS",this.state.ticker,'stopper',this.state.stop);
         console.log('width',this.state.width,'height',this.state.height);
         
         return (
@@ -223,7 +235,7 @@ class App extends React.Component {
                 getUser = {this.getUser}
                 set_Interval = {this.set_Interval}
                 addPoints = {this.addPoints}
-                
+                resetGame = {this.resetGame}
             />
         )
     }

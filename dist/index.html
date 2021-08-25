@@ -1,0 +1,77 @@
+ 
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Whack-a-mole</title>
+    <script defer src="main.js"></script></head>
+    <style>
+        .mole {
+            height: 100%;
+            width: 100%;
+            background-color: greenyellow;
+            border-radius: 50%;
+            position: absolute;
+            top:100%;
+
+            -webkit-transition:top .6s ease-in;
+            -moz-transition:top .6s ease-in;
+            -o-transition:top .6s ease-in;
+            transition:top .6s ease-in;
+        }
+        .mole.topAn{
+            top:0%;
+        }
+        .mole.red{
+            background-color: red;
+        }
+        /*
+        .red{
+            color: red;
+        }
+        */
+        h1{
+            margin: 0;
+        }
+        .game-con{
+            position: relative;
+        }
+        .count-down{
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 20%;
+            height: 20%;
+            background-color: orange;
+            z-index:1000;
+            opacity: 0.3;
+            font-size: 150px;
+            text-align: center;
+            /*display: none*/
+        }
+        .game-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            background-color: #f1f1f1;
+            overflow: hidden;
+        }
+        /*HOLE*/
+        .game-container > div {
+            background-color: green;
+            width: 33%;
+            text-align: center;
+            height: 33%;
+            font-size: 30px;
+            position: relative;
+            margin: .1%;
+        }
+    </style>
+<body>
+<!--
+<h1>DEV MODE</h1>
+<p>Client Side Only</p>
+-->
+<div id="root"></div>
+
+</body>
+</html>  

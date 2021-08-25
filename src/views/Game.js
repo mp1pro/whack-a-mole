@@ -10,7 +10,7 @@ class Game extends React.Component {
     super(props);
 
     this.state = {
-        random:8,
+        random:-1,
         grid:3,
         bit:false,
         countdown: 3
@@ -23,7 +23,7 @@ class Game extends React.Component {
     
   }
     tick(){
-      this.props.tick();
+        this.props.tick();
     }
 
   addPoints(){
@@ -64,6 +64,7 @@ class Game extends React.Component {
       
     if (this.state.countdown === 0) { 
       clearInterval(this.countdown);
+      //clearInterval(this.intervalId);
     }
     //TODO start game here
     //move countdown screen here
@@ -82,7 +83,7 @@ class Game extends React.Component {
 
       
         // wait 3 sends before game start
-        setTimeout(() => {
+        this.timeout = setTimeout(() => {
             //trigger set-interval;
             this.intervalId = setInterval(
                 this.game,
@@ -91,7 +92,7 @@ class Game extends React.Component {
             //create interval to run every second
             this.timer = setInterval(
                 this.tick,
-                2000
+                1000
             );
 
         }, 3000);
@@ -114,6 +115,8 @@ class Game extends React.Component {
   componentWillUnmount(){
     clearInterval(this.intervalId);
     clearInterval(this.countdown);
+    clearInterval(this.timer);
+    clearTimeout(this.timeout);
   }
 
   render() {
@@ -128,11 +131,14 @@ class Game extends React.Component {
     //x`x`  if (stop === true) return <Redirect to="/end" />;
     
     // if ticker is 0 clear timers
-    if(stop){
+    if(stop === true){
         clearInterval(this.timer);
         clearInterval(this.intervalId);
+        
+        return <Redirect to="/end" />
     }
-
+    
+    //if (stop === true) return <Redirect to="/end" />;
     return (
         <div className="game-con">
             {/*put count down timer here*/}

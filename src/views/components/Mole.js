@@ -7,7 +7,6 @@ class Mole extends React.Component {
         super(props);
         this.state = {
             isToggleOn: false
-            
         };
         this.handleClick = this.handleClick.bind(this);
         this.red_ = this.red_.bind(this);

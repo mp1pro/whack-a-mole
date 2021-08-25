@@ -72,7 +72,8 @@ class Routes extends React.Component {
             ticker,
             stop,
             width,
-            height
+            height,
+            resetGame
         } = this.props;
         
         return (
@@ -104,7 +105,7 @@ class Routes extends React.Component {
                             <About />
                         </Route>
                         <Route exact path="/end">
-                            <End />
+                            <End resetGame = {resetGame} ticker = {ticker}/>
                         </Route>
                         <Route exact path="/signup">
                             <Signup handleSignUp={handleSignUp} register={register}/>
