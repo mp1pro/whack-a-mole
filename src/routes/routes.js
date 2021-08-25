@@ -88,9 +88,9 @@ class Routes extends React.Component {
                                     <img src="./assets/images/wandlogo2.png" height="34"/>
                                 </Link>*/}
                             </div> 
-                            <AuthMenu auth={auth} logout={logout}/>
+                            {/*<AuthMenu auth={auth} logout={logout}/>*/}
                             {/*<DisPlay user_email={user_email} points={points} auth={auth} users={users}/>*/}
-                            <GameCon setInterval={setInterval} play_points={play_points} ticker={ticker}/>
+                            <GameCon set_Interval={set_Interval} play_points={play_points} ticker={ticker}/>
                             
                         </div>
                     </nav>

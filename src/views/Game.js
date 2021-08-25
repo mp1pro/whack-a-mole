@@ -5,6 +5,8 @@ import Mole from './components/Mole';
 import GameCon from "./components/GameCon";
 import {Redirect} from "react-router-dom";
 
+const SEC = 1000;
+
 class Game extends React.Component {
   constructor(props) {
     super(props);
@@ -57,59 +59,38 @@ class Game extends React.Component {
   }
   
   countdown_timer(){
+    const {interval} = this.props;
       
     this.setState({
       countdown: this.state.countdown - 1
     });
       
     if (this.state.countdown === 0) { 
-      clearInterval(this.countdown);
-      //clearInterval(this.intervalId);
+        clearInterval(this.countdown);
+
+        //trigger set-interval;
+        this.intervalId = setInterval(
+            this.game,
+            interval
+        );
+        //create interval to run every second
+        this.timer = setInterval(
+            this.tick,
+            SEC
+        );
     }
-    //TODO start game here
-    //move countdown screen here
+
   }
 
 
 
   componentDidMount() {
-      const {interval,stop} = this.props;
-
-      console.log('game mount',this);
-      // get users if local not set
-      //this.props.getUsers();
-      // get user if local not set
-      //this.props.getUser();
-
-      
-        // wait 3 sends before game start
-        this.timeout = setTimeout(() => {
-            //trigger set-interval;
-            this.intervalId = setInterval(
-                this.game,
-                interval
-            );
-            //create interval to run every second
-            this.timer = setInterval(
-                this.tick,
-                1000
-            );
-
-        }, 3000);
+    console.log('game mount',this);
         
-        this.countdown = setInterval(
-                this.countdown_timer,
-                1000
-        );
-
-      
-      /*setTimeout(
-          () => {
-              clearInterval(this.intervalId);
-              console.log('clear timer');
-          }
-          , 5000
-      );*/
+    this.countdown = setInterval(
+            this.countdown_timer,
+            1000
+    );
   }
 
   componentWillUnmount(){
