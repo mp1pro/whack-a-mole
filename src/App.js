@@ -21,7 +21,7 @@ class App extends React.Component {
             register:false,
             play_points: 0,
             interval: 1000,
-            ticker: 3,
+            ticker: 10,
             stop: false,
             width: 0,
             height: 0
@@ -49,7 +49,7 @@ class App extends React.Component {
         console.log('reset');
         this.setState(
             {
-                ticker: 3
+                ticker: 10
                 ,
                 stop: false
             }
