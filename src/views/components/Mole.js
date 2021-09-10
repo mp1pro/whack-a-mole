@@ -1,12 +1,11 @@
 import React from 'react';
-
+import moly from './mole.png'; 
 
 
 class Mole extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            isToggleOn: false
         };
         this.handleClick = this.handleClick.bind(this);
         this.red_ = this.red_.bind(this);
@@ -20,7 +19,7 @@ class Mole extends React.Component {
     handleClick =(e)=>{
         const {addPoints} = this.props;
         e.preventDefault();
-        this.red_(e);
+        //this.red_(e);
         console.log('handle',e.type);
         addPoints();
         
@@ -31,14 +30,15 @@ class Mole extends React.Component {
         const {random,index} = this.props;
         if ( e.type === 'click'){
             this.setState({     
-                isToggleOn: true   
+                isClicked: true   
                 
             });
         }
-        
+        /*
         setTimeout(() => {
-            this.setState({isToggleOn: false});
-        }, 500)
+            this.setState({isClicked: false});
+        }, 100)
+        */
 
     }
     //red = red_;
@@ -53,8 +53,13 @@ class Mole extends React.Component {
             <div
                 className={`mole
                     ${random === index ? 'topAn' : ''}
-                    ${random === index && this.state.isToggleOn === true  ? 'red' : ''}
+                    ${this.props.isClicked === true  ? 'red' : ''}
                 `}
+                style={{ 
+                    backgroundImage: `url(${moly})`,
+                    backgroundRepeat: 'no-repeat',
+                    backgroundPosition: 'center',
+                }}
                 onClick={this.handleClick}
             >
 

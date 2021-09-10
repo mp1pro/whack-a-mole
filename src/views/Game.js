@@ -12,10 +12,10 @@ class Game extends React.Component {
     super(props);
 
     this.state = {
-        random:-1,
+        random: -1,
         grid:3,
         bit:false,
-        countdown: 3
+        countdown: 1
     }
     this.tick = this.tick.bind(this);
     this.genRan = this.genRan.bind(this);
@@ -86,7 +86,7 @@ class Game extends React.Component {
 
   componentDidMount() {
     console.log('game mount',this);
-        
+    this.props.clearPoints(); 
     this.countdown = setInterval(
             this.countdown_timer,
             1000
@@ -106,7 +106,7 @@ class Game extends React.Component {
 
     const {random,grid} = this.state;
     const {addPoints} = this;
-    const {set_Interval,play_points,ticker,stop,width,height} = this.props;
+    const {set_Interval,play_points,ticker,stop,width,height,isClicked} = this.props;
 
     console.log('stop: ', stop);
     //x`x`  if (stop === true) return <Redirect to="/end" />;
@@ -138,7 +138,8 @@ class Game extends React.Component {
             >
                 <Hole grid={grid}>
                     {/*past in random prop 0 to 8 here set from interval*/}
-                    <Mole random={random} addPoints={addPoints}>GAME</Mole>
+                    
+                    <Mole random={random} addPoints={addPoints} isClicked={isClicked}>GAME</Mole>
                 </Hole>
             </div>
         </div>

@@ -8,18 +8,28 @@
         .mole {
             height: 100%;
             width: 100%;
+            
             background-color: greenyellow;
-            border-radius: 50%;
+            /*
+            border-radius: 50%;*/
             position: absolute;
-            top:100%;
+            top:300%;
+            cursor: pointer;
 
-            -webkit-transition:top .1s ease-in;
-            -moz-transition:top .1s ease-in;
-            -o-transition:top .1s ease-in;
-            transition:top .1s ease-in;
+            -webkit-transition:top .5s ease-in-out;
+            -moz-transition:top .5s ease-in-out;
+            -o-transition:top .5s ease-in-out;
+            transition:top .5s ease-in-out;
+            
+            -webkit-transition:background-color .1s linear;
+            -moz-transition:background-color .1s linear;
+            -o-transition:background-color .1s linear;
+            transition:background-color .1s linear;
+
         }
         .mole.topAn{
             top:0%;
+            background-color: greenyellow;
         }
         .mole.red{
             background-color: red;

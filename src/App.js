@@ -21,10 +21,11 @@ class App extends React.Component {
             register:false,
             play_points: 0,
             interval: 1000,
-            ticker: 10,
+            ticker: 5,
             stop: false,
             width: 0,
-            height: 0
+            height: 0,
+            isClicked: false
         }
         this.handleSignUp = this.handleSignUp.bind(this);
         this.login = this.login.bind(this);
@@ -36,6 +37,8 @@ class App extends React.Component {
         this.tick = this.tick.bind(this);
         this.updateWindow = this.updateWindow.bind(this);
         this.resetGame = this.resetGame.bind(this);
+        this.clearPoints = this.clearPoints.bind(this);
+        
     }
     
     updateWindow() {
@@ -49,7 +52,7 @@ class App extends React.Component {
         console.log('reset');
         this.setState(
             {
-                ticker: 10
+                ticker: 5
                 ,
                 stop: false
             }
@@ -60,7 +63,8 @@ class App extends React.Component {
         if (this.state.ticker > 0) {
             console.log('something');
             this.setState((prevState) => ({
-                ticker: prevState.ticker-1
+                ticker: prevState.ticker-1,
+                isClicked: false
             }));
         } else {
             console.log('should stop');
@@ -75,10 +79,16 @@ class App extends React.Component {
             //window.location.replace("/end");
         }
     }
+    clearPoints(){
+        this.setState((prevState) => ({
+            play_points:0
+        }));
+    }
     addPoints(){
-      this.setState((prevState) => ({
-        play_points:prevState.play_points+1
-      }));
+        this.setState((prevState) => ({
+            play_points:prevState.play_points+1,
+            isClicked:true
+        }));
     }
     
     set_Interval(inter){
@@ -227,6 +237,7 @@ class App extends React.Component {
                 ticker={this.state.ticker}
                 width={this.state.width}
                 height={this.state.height}
+                isClicked={this.state.isClicked}
                 tick={this.tick}
                 login={this.login}  
                 logout={this.logout} 
@@ -236,6 +247,7 @@ class App extends React.Component {
                 set_Interval = {this.set_Interval}
                 addPoints = {this.addPoints}
                 resetGame = {this.resetGame}
+                clearPoints={this.clearPoints}
             />
         )
     }
