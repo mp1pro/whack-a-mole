@@ -137,7 +137,9 @@ class Game extends React.Component {
                 className="game-container "
                 style={{height: height-28,width: width}}
             >
-                <Hole grid={grid}>
+                <Hole 
+                    grid={grid} width={width} height={height}
+                >
                     {/*past in random prop 0 to 8 here set from interval*/}
                     
                     <Mole random={random} addPoints={addPoints} isClicked={isClicked}>GAME</Mole>

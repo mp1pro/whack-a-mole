@@ -9,17 +9,17 @@
             height: 100%;
             width: 100%;
             
-            background-color: greenyellow;
+            background-color: none;
             /*
             border-radius: 50%;*/
             position: absolute;
-            top:300%;
+            top:100%;
             cursor: pointer;
 
-            -webkit-transition:top .5s ease-in-out;
-            -moz-transition:top .5s ease-in-out;
-            -o-transition:top .5s ease-in-out;
-            transition:top .5s ease-in-out;
+            -webkit-transition:top 1s ease-in;
+            -moz-transition:top 1s ease-in;
+            -o-transition:top 1s ease-in;
+            transition:top 1s ease-in;
             
             -webkit-transition:background-color .1s linear;
             -moz-transition:background-color .1s linear;
@@ -29,7 +29,6 @@
         }
         .mole.topAn{
             top:0%;
-            background-color: greenyellow;
         }
         .mole.red{
             background-color: red;
@@ -68,12 +67,15 @@
         /*HOLE*/
         .game-container > div {
             background-color: green;
+            /*
             width: 33%;
-            text-align: center;
             height: 33%;
+            margin: .1%;
+            */
+            text-align: center;
             font-size: 30px;
             position: relative;
-            margin: .1%;
+            
         }
         .menu > button{
             font-size: 2rem;

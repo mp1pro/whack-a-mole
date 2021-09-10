@@ -95,7 +95,6 @@ class App extends React.Component {
             isClicked:false
         }));
     }
-    
     set_Interval(inter){
         console.log('inter', inter);
         this.setState(
