@@ -75,7 +75,8 @@ class Routes extends React.Component {
             height,
             resetGame,
             clearPoints,
-            isClicked
+            isClicked,
+            resetClick
         } = this.props;
         
         return (
@@ -135,6 +136,7 @@ class Routes extends React.Component {
                                 height = {height}
                                 isClicked={isClicked}
                                 clearPoints = {clearPoints}
+                                resetClick={resetClick}
                             />
                         </Route>
                     </Switch>

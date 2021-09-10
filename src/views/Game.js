@@ -46,7 +46,8 @@ class Game extends React.Component {
   // game logic
   game(){
       let random = this.genRan();
-      clearInterval(this.intervalId)
+      clearInterval(this.intervalId);
+      this.props.resetClick();
 
       this.intervalId = setInterval(
           this.game,

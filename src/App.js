@@ -38,6 +38,7 @@ class App extends React.Component {
         this.updateWindow = this.updateWindow.bind(this);
         this.resetGame = this.resetGame.bind(this);
         this.clearPoints = this.clearPoints.bind(this);
+        this.resetClick = this.resetClick.bind(this);
         
     }
     
@@ -63,8 +64,7 @@ class App extends React.Component {
         if (this.state.ticker > 0) {
             console.log('something');
             this.setState((prevState) => ({
-                ticker: prevState.ticker-1,
-                isClicked: false
+                ticker: prevState.ticker-1
             }));
         } else {
             console.log('should stop');
@@ -88,6 +88,11 @@ class App extends React.Component {
         this.setState((prevState) => ({
             play_points:prevState.play_points+1,
             isClicked:true
+        }));
+    }
+    resetClick(){
+        this.setState((prevState) => ({
+            isClicked:false
         }));
     }
     
@@ -216,6 +221,7 @@ class App extends React.Component {
     
     componentWillUnmount() {
         window.removeEventListener('resize', this.updateWindow);
+        clearTimeout(resetClick);
     }
     
     render() {
@@ -248,6 +254,7 @@ class App extends React.Component {
                 addPoints = {this.addPoints}
                 resetGame = {this.resetGame}
                 clearPoints={this.clearPoints}
+                resetClick={this.resetClick}
             />
         )
     }
